@@ -7,6 +7,17 @@ $rowcount = rowCount('ayar');
         text-align: center;
         align: center;
     }
+
+    .genel-baslik {
+        color: black;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .logo-class {
+        font-size: 15px;
+        font-weight: 700;
+    }
 </style>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -21,83 +32,102 @@ $rowcount = rowCount('ayar');
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <form id="site-logo-form">
-                            <?php if ($rowcount > 0) { ?>
-                                <input type="hidden" name="logo-eski-yol" value="<?= $sorgu['logo'] ?>">
-                            <?php } ?>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label for="exampleInputEmail1">Logo</label>
-                                    <input id="fileUserImage" type="file" name="file" id="logo-file" class="form-control-file" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="button" id="clearFile" class="btn btn-info btn-sm" value="Temizle" style="margin-left: 5px;" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <div id="imgArea">
-                                        <span id="imgInfo" style="display: none;"> Seçilmiş resim bulunamamaktadır!</span>
-                                        <?php if (isset($sorgu['logo']) && strlen($sorgu['logo']) > 0) { ?>
-                                            <img id="imgPreview" src="<?= $sorgu['logo'] ?>" width="300" height="200" />
-                                        <?php } else { ?>
-                                            <img id="imgPreview" src="images/resim_yok.png" width="300" height="200" />
-                                        <?php  } ?>
+                        <!-- SİTE LOGO FORM -->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <form id="site-logo-form">
+                                <?php if ($rowcount > 0) { ?>
+                                    <input type="hidden" name="logo-eski-yol" value="<?= $sorgu['logo'] ?>">
+                                <?php } ?>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="fileUserImage">
+                                            <blockquote class="logo-class">Site Logo </blockquote>
+                                        </label>
+                                        <input id="fileUserImage" type="file" name="file" class="form-control-file" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" id="clearFile" class="btn btn-info btn-sm" value="Temizle" style="margin-left: 5px;" />
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <div id="imgArea">
+                                            <span id="imgInfo" style="display: none;"> Seçilmiş resim bulunamamaktadır!</span>
+                                            <?php if (isset($sorgu['logo']) && strlen($sorgu['logo']) > 0) { ?>
+                                                <img id="imgPreview" src="<?= $sorgu['logo'] ?>" width="300" height="200" />
+                                            <?php } else { ?>
+                                                <img id="imgPreview" src="images/resim_yok.png" width="300" height="200" />
+                                            <?php  } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="siteLogo('site-logo-form','site-logo');return false">Logo Kaydet</button>
+                            </form>
+                            <div class="row mt-2  pb-1 text-center">
+                                <div class="col-md-12" id="logosonuc"></div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="siteLogo('site-logo-form','site-logo');return false">Logo Kaydet</button>
-                        </form>
-                        <div class="row mt-2  pb-1 text-center">
-                            <div class="col-md-12" id="logosonuc"></div>
+                        </div>
+
+                        <!-- SİTE FAVİCON FORM -->
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <form id="site-favicon-form">
+                                <?php if ($rowcount > 0) { ?>
+                                    <input type="hidden" name="favicon-eski-yol" value="<?= $sorgu['favicon'] ?>">
+                                <?php } ?>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="fileUserImageF">
+                                            <blockquote class="logo-class">Site Favicon</blockquote>
+                                        </label>
+                                        <input id="fileUserImageF" type="file" name="file" class="form-control-file" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="button" id="clearFileF" class="btn btn-info btn-sm" value="Temizle" style="margin-left: 5px;" />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <div id="imgArea">
+                                            <span id="imgInfoF" style="display: none;"> Seçilmiş resim bulunamamaktadır!</span>
+                                            <?php if (isset($sorgu['favicon']) && strlen($sorgu['favicon']) > 0) { ?>
+                                                <img id="imgPreviewF" src="<?= $sorgu['favicon'] ?>" width="300" height="200" />
+                                            <?php } else { ?>
+                                                <img id="imgPreviewF" src="images/resim_yok.png" width="300" height="200" />
+                                            <?php  } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="siteFavicon('site-favicon-form','site-favicon');return false">Favicon Kaydet</button>
+                            </form>
+                            <div class="row mt-2  pb-1 text-center">
+                                <div class="col-md-12" id="faviconsonuc"></div>
+                            </div>
                         </div>
                         <hr>
-                        <form>
+                        <div class="clearfix"></div>
+                        <blockquote class="genel-baslik">GENEL AYARLAR FORM</blockquote>
+                        <form id="genel-ayar-form">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                    <label for="title">Site Başlık</label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Site Başlık" value="<?= @$sorgu['title'] ?>">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputPassword4">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                    <label for="desc_ription">Site Açıklama </label>
+                                    <input type="text" class="form-control" id="desc_ription" name="desc_ription" placeholder="Site description" value="<?= @$sorgu['desc_ription'] ?>">
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputAddress2">Address 2</label>
-                                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputCity">City</label>
-                                    <input type="text" class="form-control" id="inputCity">
+                                    <label for="keywords">Site Anahtar Kelimeler</label>
+                                    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Keywords" value="<?= @$sorgu['keywords'] ?>">
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label for="inputZip">Zip</label>
-                                    <input type="text" class="form-control" id="inputZip">
+                                <div class="form-group col-md-6">
+                                    <label for="author">Site Yazar</label>
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Site Author" value="<?= @$sorgu['author'] ?>">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                    <label class="form-check-label" for="gridCheck">
-                                        Check me out
-                                    </label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="genelAyar('genel-ayar-form','genel-ayar');return false">Kaydet</button>
                         </form>
                         <div class="row mt-2  pb-1 text-center">
                             <div class="col-md-12" id="sonuc"></div>

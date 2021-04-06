@@ -152,7 +152,7 @@ if ($action == 'admin-login') {
     }
 }
 
-if ($action = 'site-logo') {
+if ($action == 'site-logo') {
     if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
         $uploads_dir     = '../production/images';
         @$tmp_name       = $_FILES['file']["tmp_name"];
@@ -193,6 +193,128 @@ if ($action = 'site-logo') {
             }
         }
     } else {
-        $FNC->sendResult(False, 'Lütfen fotoğraf seçin');
+        $FNC->sendResult(False, 'Lütfen logo seçin');
+    }
+}
+
+if ($action == 'site-favicon') {
+    if (isset($_FILES['file']) && $_FILES['file']['size'] > 0) {
+        $uploads_dir     = '../production/images';
+        @$tmp_name       = $_FILES['file']["tmp_name"];
+        @$name           = $_FILES['file']["name"];
+        $refimgyol       = substr($uploads_dir, 14) . "/" . $name;
+        @move_uploaded_file($tmp_name, "$uploads_dir/$name");
+        $rowcount       = rowCount('ayar');
+        $sorgu          = select('ayar');
+        if ($rowcount > 0) {
+            $duzenle = $db->prepare("UPDATE ayar SET
+            favicon     = :favicon 
+            WHERE id = :id");
+            $update = $duzenle->execute(array(
+                'favicon' => $refimgyol,
+                'id'      => $sorgu['id']
+            ));
+            if ($update) {
+                if (!empty($_POST['favicon-eski-yol'])) {
+                    $resimyol = '../production/' . $_POST['favicon-eski-yol'];
+                    unlink($resimyol);
+                }
+                $FNC->sendResult(true, 'Faviconunuz güncelleniyor');
+            } else {
+                $FNC->sendResult(False, 'Faviconunuz güncellenirken bir hata oluştu');
+            }
+        } else {
+            $kaydet = $db->prepare("INSERT INTO ayar SET
+            favicon    = :favicon
+            ");
+
+            $insert = $kaydet->execute(array(
+                'favicon' =>  $refimgyol
+            ));
+            if ($insert) {
+                $FNC->sendResult(true, 'Faviconunuz kaydediliyor');
+            } else {
+                $FNC->sendResult(False, 'Faviconunuz kaydetilirken bir hata oluştu');
+            }
+        }
+    } else {
+        $FNC->sendResult(False, 'Lütfen favicon seçin');
+    }
+}
+
+if ($action == 'genel-ayar') {
+    $title        = filter($_POST['title']);
+    $desc_ription = filter($_POST['desc_ription']);
+    $keywords     = filter($_POST['keywords']);
+    $author       = filter($_POST['author']);
+    $rowcount     = rowCount('ayar');
+    $sorgu        = select('ayar');
+    if ($rowcount > 0) {
+        $update = $db->prepare('UPDATE ayar SET title = :title , desc_ription = :desc_ription, keywords = :keywords , author = :author WHERE id = :id ');
+        $update->execute(['title' => $title, 'desc_ription' => $desc_ription, 'keywords' => $keywords, 'author' => $author, 'id' => $sorgu['id']]);
+        if ($update) {
+            $FNC->sendResult(true, 'Ayarlarınız güncelleniyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar güncelleme hata!');
+        }
+    } else {
+        $save = $db->prepare('INSERT INTO ayar SET title = :title , desc_ription = :desc_ription, keywords = :keywords , author = :author');
+        $save->execute(['title' => $title, 'desc_ription' => $desc_ription, 'keywords' => $keywords, 'author' => $author]);
+        if ($save) {
+            $FNC->sendResult(true, 'Ayarlarınız kaydediliyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar kaydetme hata!');
+        }
+    }
+}
+
+if ($action == 'sosyal-ayar') {
+    $facebook  = filter($_POST['facebook']);
+    $twitter   = filter($_POST['twitter']);
+    $instagram = filter($_POST['instagram']);
+    $rowcount  = rowCount('ayar');
+    $sorgu     = select('ayar');
+    if ($rowcount > 0) {
+        $update = $db->prepare('UPDATE ayar SET facebook = :facebook , twitter = :twitter, instagram = :instagram WHERE id = :id ');
+        $update->execute(['facebook' => $facebook, 'twitter' => $twitter, 'instagram' => $instagram, 'id' => $sorgu['id']]);
+        if ($update) {
+            $FNC->sendResult(true, 'Ayarlarınız güncelleniyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar güncelleme hata!');
+        }
+    } else {
+        $save = $db->prepare('INSERT INTO ayar SET facebook = :facebook , twitter = :twitter, instagram = :instagram ');
+        $save->execute(['facebook' => $facebook, 'twitter' => $twitter, 'instagram' => $instagram]);
+        if ($save) {
+            $FNC->sendResult(true, 'Ayarlarınız kaydediliyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar kaydetme hata!');
+        }
+    }
+}
+
+if ($action == 'iletisim-ayar') {
+    $tel  = filter($_POST['tel']);
+    $il   = filter($_POST['il']);
+    $ilce = filter($_POST['ilce']);
+    $adres = filter($_POST['adres']);
+    $rowcount  = rowCount('ayar');
+    $sorgu     = select('ayar');
+    if ($rowcount > 0) {
+        $update = $db->prepare('UPDATE ayar SET tel = :tel , il = :il, ilce = :ilce , adres = :adres WHERE id = :id ');
+        $update->execute(['tel' => $tel, 'il' => $il, 'ilce' => $ilce, 'adres' => $adres, 'id' => $sorgu['id']]);
+        if ($update) {
+            $FNC->sendResult(true, 'Ayarlarınız güncelleniyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar güncelleme hata!');
+        }
+    } else {
+        $save = $db->prepare('INSERT INTO ayar SET tel = :tel , il = :il, instagram = :instagram , adres = :adres');
+        $save->execute(['tel' => $tel, 'il' => $il, 'ilce' => $ilce, 'adres' => $adres]);
+        if ($save) {
+            $FNC->sendResult(true, 'Ayarlarınız kaydediliyor...');
+        } else {
+            $FNC->sendResult(false, 'Ayar kaydetme hata!');
+        }
     }
 }

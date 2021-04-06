@@ -1,3 +1,9 @@
+<?php
+
+$ayar = select('ayar');
+
+?>
+
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -36,9 +42,6 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="profile clearfix">
-                        <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-                        </div>
                         <div class="profile_info">
                             <span>Hoşgeldin,</span>
                             <h2>Sayın <?= $_SESSION['admin']['isim_soyisim'] ?></h2>
@@ -57,10 +60,11 @@
                                 <li><a><i class="fa fa-cogs"></i> Site Ayarları <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="genel-ayar">Genel Ayarlar</a></li>
-                                        <li><a href="#">İletişim Ayarları</a></li>
-                                        <li><a href="#">Sosyal Ayarlar</a></li>
+                                        <li><a href="sosyal-ayar">Sosyal Ayarları</a></li>
+                                        <li><a href="iletisim-ayar">İletişim Ayarlar</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="firma-list"><i class="fa fa-list"></i> Firma Listesi </a> </li>
                             </ul>
                         </div>
                     </div>

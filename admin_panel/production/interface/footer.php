@@ -10,6 +10,7 @@
        </div>
 
 
+       <script src="../template/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
        <script src="../template/vendors/jquery/dist/jquery.min.js"></script>
        <script src="../template/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
        <script src="../template/vendors/fastclick/lib/fastclick.js"></script>
@@ -39,3 +40,66 @@
        </body>
 
        </html>
+
+       <script type="text/javascript">
+           $.getJSON("../inc/il-bolge.json", function(sonuc) {
+               $("#il").append("<option value='0'>İl Seçin</option>");
+               $.each(sonuc, function(index, value) {
+                   var row = "";
+                   row += '<option value="' + value.il + '">' + value.il + '</option>';
+                   $("#il").append(row);
+               })
+           });
+           $("#il").on("change", function() {
+               var il = $(this).val();
+               $("#ilce").attr("disabled", false).html("<option value='0'>İlçe Seçin</option>");
+               $.getJSON("../inc/il-ilce.json", function(sonuc) {
+                   $.each(sonuc, function(index, value) {
+                       var row = "";
+                       if (value.il == il) {
+                           row += '<option value="' + value.ilce + '">' + value.ilce + '</option>';
+                           $("#ilce").append(row);
+                       }
+                   });
+               });
+           });
+       </script>
+
+       <script>
+           $.getJSON("../inc/il-bolge.json", function(sonuc) {
+               $("#il").append("<option value='0'>Seçiniz..</option>");
+               var il = '<?= $ayar['il'] ?>';
+               $.each(sonuc, function(index, value) {
+                   var row = "";
+                   row += '<option value="' + value.il + '"' + (il == value.il ? 'selected' : '') + ' >' + value.il + '</option>';
+                   $("#il").append(row);
+               })
+           });
+
+           $.getJSON("../inc/il-ilce.json", function(sonuc) {
+               var il = '<?= $ayar['il'] ?>';
+               var ilcee = '<?= $ayar['ilce'] ?>';
+               $("#ilce").attr("disabled", false).html("<option value='0'>Seçiniz..</option>");
+               $.each(sonuc, function(index, value) {
+                   var row = "";
+                   if (value.il == il) {
+                       row += '<option value="' + value.ilce + '"' + (ilcee == value.ilce ? 'selected' : '') + ' >' + value.ilce + '</option>';
+                       $("#ilce").append(row);
+                   }
+               });
+           });
+
+           $("#il").on("change", function() {
+               var il = $(this).val();
+               $("#ilce").attr("disabled", false).html("<option value='0'>Seçiniz..</option>");
+               $.getJSON("../inc/il-ilce.json", function(sonuc) {
+                   $.each(sonuc, function(index, value) {
+                       var row = "";
+                       if (value.il == il) {
+                           row += '<option value="' + value.ilce + '">' + value.ilce + '</option>';
+                           $("#ilce").append(row);
+                       }
+                   });
+               });
+           });
+       </script>

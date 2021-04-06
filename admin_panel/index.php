@@ -1,10 +1,8 @@
 <?php
 if (isset($_SESSION['admin'])) {
-    header('Location : production/index.php');
+    header("Location : production/index.php");
     die();
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -224,11 +222,13 @@ if (isset($_SESSION['admin'])) {
             $('input[id=username]').focus();
             $('input[id=username]').css("border", "1px solid red");
         } else if (password == 0) {
+            $('input[id=username]').css("border", "1px solid green");
             $('#alert').html('<div class="alert alert-danger" role="alert"> Lütfen şifre giriniz! </div>');
             $('input[id=password]').focus();
             $('input[id=username]').css("border", "1px solid green");
             $('input[id=password]').css("border", "1px solid red");
         } else if (password.length < 6) {
+            $('input[id=username]').css("border", "1px solid green");
             $('#alert').html('<div class="alert alert-danger" role="alert"> Lütfen şifre en az 6 haneli giriniz! </div>');
             $('input[id=password]').focus();
             $('input[id=username]').css("border", "1px solid green");

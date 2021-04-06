@@ -1,8 +1,8 @@
 <?php
 
 require_once '../inc/function.php';
-include("interface/header.php");
 if (isset($_SESSION['admin'])) {
+    include("interface/header.php");
     if (isset($_GET['page'])) :
         $page = filter_var($_GET['page'], FILTER_SANITIZE_STRING);
     endif;
@@ -14,6 +14,6 @@ if (isset($_SESSION['admin'])) {
     }
     include("interface/footer.php");
 } else {
-    header('Location : ../index.php');
+    header("Location : http://localhost/NeredeBurada%20Proje/neredeburada.net/admin_panel/");
     die();
 }
