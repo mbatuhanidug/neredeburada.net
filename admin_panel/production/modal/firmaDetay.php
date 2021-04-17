@@ -33,7 +33,7 @@ $firma_resim = $resim->fetch(PDO::FETCH_ASSOC);
     }
 
     .monitor {
-        width: 275px;
+        width: 340px;
         height: 194px;
         overflow-y: scroll;
         border: solid 1em #333;
@@ -60,7 +60,7 @@ $firma_resim = $resim->fetch(PDO::FETCH_ASSOC);
         width: 150px;
         height: 50px;
         top: 244px;
-        left: 67px;
+        left: 82px;
     }
 
     .stand:after {
@@ -73,7 +73,7 @@ $firma_resim = $resim->fetch(PDO::FETCH_ASSOC);
         width: 300px;
         height: 15px;
         top: 50px;
-        left: -6px;
+        left: 17px;
     }
 
     blockquote {

@@ -27,6 +27,11 @@ if ($action == 'admin-login') {
             if ($admin['giris_hakki'] <= 0) {
                 $FNC->sendResult(false, 'Hesabınız blokelenmiştir. Lütfen sistem yöneticisine başvurunuz!', '', 'username');
             } else {
+                $ayarkaydet = $db->prepare('UPDATE admin_login SET giris_hakki = :sayi WHERE username = :username');
+                $update = $ayarkaydet->execute([
+                    'sayi'       => 3,
+                    'username'   => $username,
+                ]);
                 $_SESSION['admin'] = $admin;
                 $FNC->sendResult(true, 'Giriş başarılı yönlendiriliyorsunuz.');
             }
@@ -78,7 +83,7 @@ if ($action == 'admin-login') {
                                     ");
 
                                 $insert = $kaydet->execute(array(
-                                    'admin_id'    => filter($_POST['username']),
+                                    'admin_id'    => $username,
                                     'user_argent' => $_SERVER['HTTP_USER_AGENT'],
                                     'ip_adress'   => $api_result['query'],
                                     'ulke'        => $api_result['country'],
@@ -127,7 +132,7 @@ if ($action == 'admin-login') {
                             ");
 
                         $insert = $kaydet->execute(array(
-                            'admin_id'    => filter($_POST['username']),
+                            'admin_id'    => $username,
                             'user_argent' => $_SERVER['HTTP_USER_AGENT'],
                             'ip_adress'   => $api_result['query'],
                             'ulke'        => $api_result['country'],
@@ -294,9 +299,9 @@ if ($action == 'sosyal-ayar') {
 }
 
 if ($action == 'iletisim-ayar') {
-    $tel  = filter($_POST['tel']);
-    $il   = filter($_POST['il']);
-    $ilce = filter($_POST['ilce']);
+    $tel   = filter($_POST['tel']);
+    $il    = filter($_POST['il']);
+    $ilce  = filter($_POST['ilce']);
     $adres = filter($_POST['adres']);
     $rowcount  = rowCount('ayar');
     $sorgu     = select('ayar');
@@ -316,5 +321,28 @@ if ($action == 'iletisim-ayar') {
         } else {
             $FNC->sendResult(false, 'Ayar kaydetme hata!');
         }
+    }
+}
+
+if ($action == 'hatali-giris') {
+    $id = (int)filter($_POST['id']);
+    $update = $db->prepare('UPDATE alogin SET durum = :durum WHERE id = :id ');
+    $update->execute(['durum' => 1, 'id' => $id]);
+    if ($update) {
+        $FNC->sendResult(true, 'Ayarlarınız güncelleniyor...');
+    } else {
+        $FNC->sendResult(false, 'Ayar güncelleme hata!');
+    }
+}
+
+if ($action == 'firma-durum') {
+    $id    = (int) filter($_POST['id']);
+    $durum = (int) filter($_POST['durum']);
+    $update = $db->prepare('UPDATE firmalar SET durum = :durum WHERE id = :id ');
+    $update->execute(['durum' => $durum, 'id' => $id]);
+    if ($update) {
+        $FNC->sendResult(true, 'Ayarlarınız güncelleniyor...');
+    } else {
+        $FNC->sendResult(false, 'Firma durum güncelleme hata!');
     }
 }

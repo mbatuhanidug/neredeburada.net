@@ -12,7 +12,7 @@ $ayar = select('ayar');
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+    <link rel="icon" href="<?= $ayar['favicon'] ?>" type="image/ico" />
     <meta name="title" content="Türkiye Yerel Reklam Arama Ve Firma Rehberi">
     <meta name="description" content="Türkiyenin yerel reklam,firma ve nöbetçi eczaneleri arayabileceğiniz yerel arama web sitesi">
     <meta name="keywords" content="firma,reklam,eczane">
@@ -38,7 +38,7 @@ $ayar = select('ayar');
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index" class="site_title"><i class="fa fa-paw"></i> <span>Nerede Burada</span></a>
+                        <a href="index" class="site_title"><i class="fa fa-paw"></i> <span>neredeburada.net</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <div class="profile clearfix">
@@ -65,6 +65,8 @@ $ayar = select('ayar');
                                     </ul>
                                 </li>
                                 <li><a href="firma-list"><i class="fa fa-list"></i> Firma Listesi </a> </li>
+                                <li><a href="kullanici-list"><i class="fa fa-list-alt"></i> Kullanıcı Listesi </a> </li>
+                                <li><a href="reklam-list"><i class="fa fa-list"></i> Reklam Listesi </a> </li>
                             </ul>
                         </div>
                     </div>
@@ -101,3 +103,5 @@ $ayar = select('ayar');
                 </div>
             </div>
             <!-- /top navigation -->
+            <br>
+            <br>

@@ -12,3 +12,6 @@ RewriteRule ^(.*)$ $1.php
 RewriteRule ^genel-ayar$ index.php?page=genel-ayar [L,NC]
 RewriteRule ^iletisim-ayar$ index.php?page=iletisim-ayar [L,NC]
 RewriteRule ^sosyal-ayar$ index.php?page=sosyal-ayar [L,NC]
+RewriteRule ^firma-list$ index.php?page=firma-list [L,NC]
+RewriteRule ^kullanici-list$ index.php?page=kullanici-list [L,NC]
+RewriteRule ^reklam-list$ index.php?page=reklam-list [L,NC]

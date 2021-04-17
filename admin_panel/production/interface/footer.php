@@ -36,11 +36,10 @@
        <script src="../template/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
        <script src="../template/build/js/custom.min.js"></script>
        <script src="../Controller/admin.js"></script>
-
+       <script src="../Controller/ajax.js"></script>
        </body>
 
        </html>
-
        <script type="text/javascript">
            $.getJSON("../inc/il-bolge.json", function(sonuc) {
                $("#il").append("<option value='0'>İl Seçin</option>");

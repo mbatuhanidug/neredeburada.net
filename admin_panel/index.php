@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['admin'])) {
-    header("Location : production/index.php");
+    header("Location : production/");
     die();
 }
 ?>
