@@ -49,9 +49,6 @@
 
     </head>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
         
         <!-- Add your site or application content here -->
         <!-- Preloader Start Here -->
@@ -281,7 +278,7 @@
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li><a class="apply-now-btn" href="index.htm" id="logout-button">Logout</a></li>
+                                        <li><a class="apply-now-btn" href="index.php" id="logout-button">Logout</a></li>
                                     </ul>
                                 </div>                          
                             </div>                          

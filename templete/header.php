@@ -1,58 +1,4 @@
-<!doctype html>
-<html class = "no-js" lang="">
-<head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Foxtar | Home 2</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="img\favicon.png">
-
-        <!-- Normalize CSS --> 
-        <link rel="stylesheet" href="css\normalize.css">
-
-        <!-- Main CSS -->         
-        <link rel="stylesheet" href="css\main.css">
-
-        <!-- Bootstrap CSS --> 
-        <link rel="stylesheet" href="css\bootstrap.min.css">
-
-        <!-- Animate CSS --> 
-        <link rel="stylesheet" href="css\animate.min.css">
-
-        <!-- Font-awesome CSS-->
-        <link rel="stylesheet" href="css\font-awesome.min.css">
-        
-        <!-- Owl Caousel CSS -->
-        <link rel="stylesheet" href="vendor\OwlCarousel\owl.carousel.min.css">
-        <link rel="stylesheet" href="vendor\OwlCarousel\owl.theme.default.min.css">
-        
-        <!-- Main Menu CSS -->      
-        <link rel="stylesheet" href="css\meanmenu.min.css">
-
-        <!-- Datetime Picker Style CSS -->
-        <link rel="stylesheet" href="css\jquery.datetimepicker.css">
-
-         <!-- ReImageGrid CSS -->
-        <link rel="stylesheet" href="css\reImageGrid.css">
-
-        <!-- Switch Style CSS -->
-        <link rel="stylesheet" href="css\hover-min.css">
-
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="style.css">
-
-        <!-- Modernizr Js -->
-        <script src="js\modernizr-2.8.3.min.js"></script>
-
-    </head>
-     <!-- Preloader Start Here -->
-     <div id="preloader"></div>
-        <!-- Preloader End Here -->
-        <!-- Main Body Area Start Here -->
-        <div id="wrapper">
  <!-- Header Area Start Here -->
  <header>                
                 <div id="header2" class="header2-area right-nav-mobile">
@@ -61,14 +7,12 @@
                             <div class="row">                         
                                 <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                                     <div class="logo-area">
-                                        <a href="index.htm"><img class="img-responsive" src="img\logo.png" alt="logo"></a>
+                                        <a href="index.php"><img class="img-responsive" src="img\logo.png" alt="logo"></a>
                                     </div>
                                 </div> 
                                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                     <ul class="profile-notification">                                            
-                                        <li>
-                                            <div class="notify-contact"><span>Need help?</span> Talk to an expert: +61 3 8376 6284</div>
-                                        </li>                                        
+                                                                               
                                         <li>
                                             <div class="cart-area">
                                                 <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
@@ -181,7 +125,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li><a class="apply-now-btn-color hidden-on-mobile" href="registration.htm">Register</a></li>
+                                        <li><a class="apply-now-btn-color hidden-on-mobile" href="registration.php">Register</a></li>
                                     </ul>
                                 </div>                          
                             </div>                          
@@ -191,21 +135,10 @@
                         <div class="container">
                             <nav id="desktop-nav">
                                 <ul>
-                                    <li class="active"><a href="#">Home</a>
-                                        <ul>
-                                            <li><a href="index.htm">Home 1</a></li>
-                                            <li><a href="index2.htm">Home 2</a></li>
-                                        </ul>   
-                                    </li>
-                                    <li><a href="about.htm">About</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li class="active"><a href="index.php">Anasayfa</a></li>
+                                    <li><a href="about.php">Hakkımızda</a></li>
+                                    <li><a href="hizmetler.php">Hizmetler</a>
                                         <ul class="mega-menu-area"> 
-                                            <li>
-                                                <a href="index.htm">Home 1</a>
-                                                <a href="index2.htm">Home 2</a>
-                                                <a href="about.htm">About</a>
-                                                <a href="product-page-grid.htm">Product Grid</a>
-                                            </li> 
                                             <li>
                                                 <a href="product-page-list.htm">Product List</a>
                                                 <a href="product-category-grid.htm">Category Grid</a>
@@ -226,25 +159,8 @@
                                             </li>
                                         </ul>                                            
                                     </li>
-                                    <li><a href="product-page-grid.htm">WordPress</a></li>
-                                    <li><a href="product-category-grid.htm">Joomla</a></li>
-                                    <li><a href="product-category-list.htm">Plugins</a></li>
-                                    <li><a href="product-page-list.htm">Components</a></li>
-                                    <li><a href="product-category-grid.htm">PSD</a></li>
-                                    <li><a href="#">Blog</a>
-                                        <ul>
-                                            <li><a href="blog.htm">Blog</a></li>
-                                            <li><a href="single-blog.htm">Blog Details</a></li> 
-                                            <li class="has-child-menu"><a href="#">Second Level</a>
-                                            <ul class="thired-level">
-                                                <li><a href="index.htm">Thired Level 1</a></li>
-                                                <li><a href="index.htm">Thired Level 2</a></li>
-                                            </ul>
-                                        </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.htm">Contact</a></li>
-                                    <li><a href="help.htm">Help</a></li>
+                                    <li><a href="contact.php">İletişim</a></li>
+                                    
                                 </ul>
                             </nav>
                         </div>
@@ -258,19 +174,11 @@
                                 <div class="mobile-menu">
                                     <nav id="dropdown">
                                         <ul>
-                                            <li class="active"><a href="#">Home</a>
-                                                <ul>
-                                                    <li><a href="index.htm">Home 1</a></li>
-                                                    <li><a href="index2.htm">Home 2</a></li>
-                                                </ul>   
-                                            </li>
-                                            <li><a href="about.htm">About</a></li>
-                                            <li><a href="#">Pages</a>
+                                            <li class="active"><a href="index.htm">Anasayfa</a></li>
+                                            <li><a href="about.htm">Hakkımızda</a></li>
+                                            <li><a href="#">Hizmetler</a>
                                                 <ul class="mega-menu-area"> 
                                                     <li>
-                                                        <a href="index.htm">Home 1</a>
-                                                        <a href="index2.htm">Home 2</a>
-                                                        <a href="about.htm">About</a>
                                                         <a href="product-page-grid.htm">Product Grid</a>
                                                     </li> 
                                                     <li>
@@ -293,25 +201,7 @@
                                                     </li>
                                                 </ul>                                            
                                             </li>
-                                            <li><a href="product-page-grid.htm">WordPress</a></li>
-                                            <li><a href="product-category-grid.htm">Joomla</a></li>
-                                            <li><a href="product-category-list.htm">Plugins</a></li>
-                                            <li><a href="product-page-list.htm">Components</a></li>
-                                            <li><a href="product-category-grid.htm">PSD</a></li>
-                                            <li><a href="#">Blog</a>
-                                                <ul>
-                                                    <li><a href="blog.htm">Blog</a></li>
-                                                    <li><a href="single-blog.htm">Blog Details</a></li> 
-                                                    <li class="has-child-menu"><a href="#">Second Level</a>
-                                                    <ul class="thired-level">
-                                                        <li><a href="index.htm">Thired Level 1</a></li>
-                                                        <li><a href="index.htm">Thired Level 2</a></li>
-                                                    </ul>
-                                                </li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.htm">Contact</a></li>
-                                            <li><a href="help.htm">Help</a></li>
+                                            <li><a href="contact.htm">İletişim</a></li>
                                         </ul>
                                     </nav>
                                 </div>           
@@ -322,4 +212,3 @@
                 <!-- Mobile Menu Area End -->
             </header>
             <!-- Header Area End Here -->
-</html>
