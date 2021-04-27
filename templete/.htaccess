@@ -1,0 +1,10 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteCond $1 !^(css|js|images|inc|lang)
+RewriteRule ^(.*)$ $1.php
+
+RewriteRule ^register$ index.php?page=register [L,NC]
+RewriteRule ^detay/oyuncu/([0-9a-zA-Z-_]+)$ index.php?page=detay&sef=$1 [NC]
