@@ -135,3 +135,27 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+    $.getJSON("inc/il-bolge.json", function(sonuc) {
+        $("#firma_il").append("<option value='0'>İl Seçin</option>");
+        $.each(sonuc, function(index, value) {
+            var row = "";
+            row += '<option value="' + value.il + '">' + value.il + '</option>';
+            $("#firma_il").append(row);
+        })
+    });
+    $("#firma_il").on("change", function() {
+        var il = $(this).val();
+        $("#firma_ilce").attr("disabled", false).html("<option value='0'>İlçe Seçin</option>");
+        $.getJSON("inc/il-ilce.json", function(sonuc) {
+            $.each(sonuc, function(index, value) {
+                var row = "";
+                if (value.il == il) {
+                    row += '<option value="' + value.ilce + '">' + value.ilce + '</option>';
+                    $("#firma_ilce").append(row);
+                }
+            });
+        });
+    });
+</script>

@@ -76,7 +76,7 @@ $firmaOnay->execute(['durum' => 2]);
                                                     }
                                                     ?>
                                                     <a onclick="firmaDetay('<?= $firma['id'] ?>')" style="cursor:pointer"><i class="fa fa-list" title="<?= $firma['firma_adi'] ?> Firması Detay"></i></a>
-                                                    <a onclick="firmaDurum('<?= $firma['id'] ?>','<?= $durum ?>')" style="cursor:pointer"><i class="<?= $class ?>" title="<?= $firma['firma_adi'] ?> Firması <?= $title ?>"></i></a>
+                                                    <a onclick="firmaDurum('<?= $firma['id'] ?>')" style="cursor:pointer"><i class="fa fa-refresh" title="<?= $firma['firma_adi'] ?> durum güncelle"></i></a>
                                                 </div>
                                             </div>
                                         </div>

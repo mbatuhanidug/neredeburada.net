@@ -257,6 +257,13 @@ function firmaDetay(ID) {
     });
 }
 
+function firmaDurum(ID) {
+    $('#firma_modal_form').modal('show');
+    $.get("modal/firmadurum.php?firma_id=" + ID, function(data) {
+        $('#firma_modal_form_content').html(data);
+    });
+}
+
 /* hatalı giriş okudum */
 
 function hataliGiris(id) {
@@ -264,23 +271,6 @@ function hataliGiris(id) {
         type: "POST",
         url: '../dao/ajax.php',
         data: { id: id, islem_turu: 'hatali-giris' },
-    }).done(function(data) {
-        var response = jQuery.parseJSON(data);
-        if (response.success) {
-            window.location.reload();
-        } else {
-            $("#sonuc").show();
-            $("#sonuc").html('<div class="alert alert-danger mt-5">' + response.message + '</div>');
-            $("#sonuc").fadeOut(5000);
-        }
-    });
-}
-/* Firma durum */
-function firmaDurum(id, durum) {
-    $.ajax({
-        type: "POST",
-        url: '../dao/ajax.php',
-        data: { id: id, durum: durum, islem_turu: 'firma-durum' },
     }).done(function(data) {
         var response = jQuery.parseJSON(data);
         if (response.success) {

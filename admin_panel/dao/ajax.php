@@ -335,9 +335,19 @@ if ($action == 'hatali-giris') {
     }
 }
 
-if ($action == 'firma-durum') {
+if ($action == 'firma-durum-guncelle') {
     $id    = (int) filter($_POST['id']);
     $durum = (int) filter($_POST['durum']);
+    $aciklama = filter($_POST['aciklama']);
+    if (isset($_POST['durum_mail_gonder']) && $_POST['durum_mail_gonder'] == 'on') {
+        $from = "dogannsebati@gmail.com";
+        $to = "test@hostinger.com";
+        $subject = "Checking PHP mail";
+        $message = "PHP mail works just fine";
+        $headers = "From:" . $from;
+        mail($to, $subject, $message, $headers);
+        echo "The email message was sent.";
+    }
     $update = $db->prepare('UPDATE firmalar SET durum = :durum WHERE id = :id ');
     $update->execute(['durum' => $durum, 'id' => $id]);
     if ($update) {

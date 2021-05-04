@@ -135,18 +135,6 @@ $firma_resim = $resim->fetch(PDO::FETCH_ASSOC);
                                     <input type="text" readonly class="form-control-plaintext" value="<?= $firma['diger_bilgiler'] ?>">
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">V.Kimlik Numarası</label>
-                                <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" value="<?= $firma['vergi_kimlik_no'] ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Vergi Dairesi</label>
-                                <div class="col-sm-10">
-                                    <input type="text" readonly class="form-control-plaintext" value="<?= $firma['vergi_dairesi'] ?>">
-                                </div>
-                            </div>
                             <hr>
                             <blockquote>Firma İletişim Bilgileri</blockquote>
                             <hr>
