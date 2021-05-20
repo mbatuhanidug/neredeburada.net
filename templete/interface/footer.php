@@ -41,11 +41,11 @@
                     <div class="footer-box">
                         <h3 class="title-bar-left title-bar-footer">Follow Us On</h3>
                         <ul class="footer-social">
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook" style="margin-top: 9px;" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" style="margin-top: 9px;" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" style="margin-top: 9px;" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest" style="margin-top: 9px;" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" style="margin-top: 9px;" aria-hidden="true"></i></a></li>
                         </ul>
                         <div class="newsletter-area">
                             <h3>Newsletter Sign Up!</h3>
@@ -104,6 +104,7 @@
 <!-- Gridrotator js -->
 <script src="js\jquery.gridrotator.js" type="text/javascript"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <!-- Custom Js -->
 <script src="js\main.js" type="text/javascript"></script>
 <script src="ajax.js" type="text/javascript"></script>
@@ -154,6 +155,45 @@
                 if (value.il == il) {
                     row += '<option value="' + value.ilce + '">' + value.ilce + '</option>';
                     $("#firma_ilce").append(row);
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    $.getJSON("inc/il-bolge.json", function(sonuc) {
+        $("#profil_il").append("<option value='0'>Seçiniz..</option>");
+        var il = '<?= $kullanicicek['il'] ?>';
+        $.each(sonuc, function(index, value) {
+            var row = "";
+            row += '<option value="' + value.il + '"' + (il == value.il ? 'selected' : '') + ' >' + value.il + '</option>';
+            $("#profil_il").append(row);
+        })
+    });
+
+    $.getJSON("inc/il-ilce.json", function(sonuc) {
+        var il = '<?= $kullanicicek['il'] ?>';
+        var ilcee = '<?= $kullanicicek['ilce'] ?>';
+        $("#profil_ilce").attr("disabled", false).html("<option value='0'>Seçiniz..</option>");
+        $.each(sonuc, function(index, value) {
+            var row = "";
+            if (value.il == il) {
+                row += '<option value="' + value.ilce + '"' + (ilcee == value.ilce ? 'selected' : '') + ' >' + value.ilce + '</option>';
+                $("#profil_ilce").append(row);
+            }
+        });
+    });
+
+    $("#profil_il").on("change", function() {
+        var il = $(this).val();
+        $("#profil_ilce").attr("disabled", false).html("<option value='0'>Seçiniz..</option>");
+        $.getJSON("inc/il-ilce.json", function(sonuc) {
+            $.each(sonuc, function(index, value) {
+                var row = "";
+                if (value.il == il) {
+                    row += '<option value="' + value.ilce + '">' + value.ilce + '</option>';
+                    $("#profil_ilce").append(row);
                 }
             });
         });

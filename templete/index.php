@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/function.php';
+require_once '../admin_panel/inc/function.php';
 include("interface/header.php");
 
 if (isset($_GET['page'])) :

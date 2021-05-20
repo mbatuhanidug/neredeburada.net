@@ -1,12 +1,29 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-ob_start();
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+$secure         = true; // if you only want to receive the cookie over HTTPS
+$httponly       = true; // prevent JavaScript access to session cookie
+$samesite       = 'None';
+$maxlifetime    = 60 * 60 * 24 * 2; // 2 days;
+$host           = $_SERVER['HTTP_HOST'];
+
+if (PHP_VERSION_ID < 70300) {
+    session_set_cookie_params($maxlifetime, '/; samesite=' . $samesite, $host, $secure, $httponly);
+} else {
+    session_set_cookie_params([
+        'lifetime' => $maxlifetime,
+        'path' => '/',
+        'domain' => $host,
+        'secure' => $secure,
+        'httponly' => $httponly,
+        'samesite' => $samesite
+    ]);
+}
 session_start();
 date_default_timezone_set('Europe/Istanbul');
 require_once('dbconnection.php');
-setcookie('same-site-cookie', 'foo', ['samesite' => 'Lax']);
-setcookie('cross-site-cookie', 'bar', ['samesite' => 'None', 'secure' => true]);
-
 
 class fnc
 {
@@ -24,16 +41,6 @@ class fnc
 }
 
 $FNC = new fnc();
-
-function id_uret($uzunluk)
-{
-    $randuretid = crypt(uniqid(rand(), 1));
-    $randuretid = strip_tags(stripslashes($randuretid));
-    $randuretid = str_replace(".", "", $randuretid);
-    $randuretid = strrev(str_replace("/", "", $randuretid));
-    $randuretid = substr($randuretid, 0, $uzunluk);
-    return $randuretid;
-}
 
 function seo($str, $options = array())
 {
@@ -165,4 +172,13 @@ function GetIP()
     }
 
     return $ip;
+}
+
+
+if (isset($_SESSION['kullanici'])) {
+    $kullanicicek = $_SESSION['kullanici'];
+}
+
+if (isset($_SESSION['firma'])) {
+    $firmacek = $_SESSION['firma'];
 }

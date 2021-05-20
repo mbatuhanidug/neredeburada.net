@@ -68,7 +68,7 @@ function kullaniciKayit(form_name, islem_turu) {
                     swal("Başarılı!", 'Başarıyla kayıt oldunuz.Giriş yapabilirsiniz.', "success");
                 } else {
                     $('#k-alert').hide();
-                    swal("Hata!", response.messange, "warning");
+                    swal("Hata!", response.message, "warning");
                 }
             },
         });
@@ -149,4 +149,85 @@ function firmaKayit(form_name, islem_turu) {
             },
         });
     }
+}
+
+
+function kullaniciGiris(form_name, islem_turu) {
+    var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: serialized,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+                $(location).attr('href', 'index');
+            } else {
+                $('#login-button').trigger('click');
+                swal("Hata!", response.message, "warning");
+            }
+        },
+    });
+}
+
+function profilGuncelle(form_name, islem_turu) {
+    var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: serialized,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+                window.location.reload();
+            } else {
+                swal("Hata!", response.message, "warning");
+            }
+        },
+    });
+}
+
+
+function sifreGuncelle(form_name, islem_turu) {
+    var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: serialized,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+                let timerInterval;
+                Swal.fire({
+                    title: 'Şifre Güncelleme!',
+                    html: 'Şifreniz güncellendi. <b></b> Çıkış yapılıyor....',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getHtmlContainer()
+                            if (content) {
+                                const b = content.querySelector('b')
+                                if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        $(location).attr('href', 'logout');
+                    }
+                })
+
+            } else {
+                swal("Hata!", response.message, "warning");
+            }
+        },
+    });
 }

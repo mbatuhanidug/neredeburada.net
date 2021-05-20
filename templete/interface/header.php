@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="vendor\noUiSlider\nouislider.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="js\modernizr-2.8.3.min.js"></script>
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,120 +41,49 @@
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
                                 <ul class="profile-notification">
-
-                                    <li>
-                                        <div class="cart-area">
-                                            <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span>2</span></a>
-                                            <ul>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img\product\more2.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h1><a href="#">Product Title Here</a></h1>
-                                                                        <h2><span>Code:</span> STPT600</h2>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>$49</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="cart-single-product">
-                                                        <div class="media">
-                                                            <div class="pull-left cart-product-img">
-                                                                <a href="#">
-                                                                    <img class="img-responsive" alt="product" src="img\product\more3.jpg">
-                                                                </a>
-                                                            </div>
-                                                            <div class="media-body cart-content">
-                                                                <ul>
-                                                                    <li>
-                                                                        <h1><a href="#">Product Title Here</a></h1>
-                                                                        <h2><span>Code:</span> STPT460</h2>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>X 1</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <p>$75</p>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a class="trash" href="#"><i class="fa fa-trash-o"></i></a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <table class="table table-bordered sub-total-area">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Total</td>
-                                                                <td>$124</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Discount</td>
-                                                                <td>$30</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Vat(20%)</td>
-                                                                <td>$18.8</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Sub Total</td>
-                                                                <td>$112.8</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </li>
-                                                <li>
-                                                    <ul class="cart-checkout-btn">
-                                                        <li><a href="cart.htm" class="btn-find"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Go to Cart</a></li>
-                                                        <li><a href="check-out.htm" class="btn-find"><i class="fa fa-share" aria-hidden="true"></i>Go to Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="apply-btn-area">
-                                            <a class="apply-now-btn" href="#" id="login-button">Login</a>
-                                            <div class="login-form" id="login-form" style="display: none;">
-                                                <h2>Login</h2>
-                                                <form>
-                                                    <input class="form-control" type="text" placeholder="Name">
-                                                    <input class="form-control" type="password" placeholder="Password">
-                                                    <button class="btn-login" type="submit" value="Login">Login</button>
-                                                    <a class="btn-login" href="registration.htm">Registration</a>
-                                                    <div class="remember-lost">
-                                                        <div class="checkbox">
-                                                            <label><input type="checkbox"> Remember me</label>
-                                                        </div>
-                                                        <a class="lost-password" href="#">Lost Your Password?</a>
-                                                    </div>
-                                                    <button class="cross-btn form-cancel" type="submit" value=""><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                </form>
+                                    <?php if (!isset($_SESSION['kullanici']) && !isset($_SESSION['firma'])) { ?>
+                                        <li>
+                                            <div class="apply-btn-area">
+                                                <a class="apply-now-btn" href="#" id="login-button">Giriş Yap</a>
+                                                <div class="login-form" id="login-form" style="display: none;">
+                                                    <h2>Giriş Yap</h2>
+                                                    <label class="control-label" for="first-name" style="margin-left:100px;">Kurumsal giriş için tıklayınız</label>
+                                                    <input type="checkbox" id="first-name" class="form-control" style="cursor: pointer;height: 10;padding: 0;" onchange="$('#firma-giris-form').toggle('slow');$('#kullanici-giris-form').toggle('slow');">
+                                                    <form id="kullanici-giris-form">
+                                                        <input class="form-control" type="text" name="mail" id="mail" placeholder="Kullanıcı Mail Adresinizi Giriniz...">
+                                                        <input class="form-control" type="password" name="sifre" id="sifre" placeholder="Şifrenizi Giriniz...">
+                                                        <button class="btn-login" type="button" onclick="kullaniciGiris('kullanici-giris-form','kullanici-giris');return false;" value="">Giriş Yap</button>
+                                                    </form>
+                                                    <form id="firma-giris-form" style="display: none;">
+                                                        <input class="form-control" type="text" placeholder="Firma E-posta Adresini Giriniz...">
+                                                        <input class="form-control" type="password" placeholder="Şifrenizi Giriniz...">
+                                                        <input class="form-control" type="password" placeholder="Yetkili Telefon Numarası Giriniz...">
+                                                        <button class="btn-login" type="button" onclick="firmaGiris('firma-giris-form','firma-giris');return false;" value="">Giriş Yap</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                    <li><a class="apply-now-btn-color hidden-on-mobile" href="register">Kayıt Ol</a></li>
+                                        </li>
+                                        <li><a class="apply-now-btn-color hidden-on-mobile" href="register">Kayıt Ol</a></li>
+                                    <?php } else if ($_SESSION['kullanici']['id'] > 0) { ?>
+                                        <li>
+                                            <div class="user-account-info">
+                                                <div class="user-account-info-controler" style="cursor:pointer">
+                                                    <div class="user-account-title">
+                                                        <div class="user-account-name"><?= $_SESSION['kullanici']['ad_soyad'] ?> <i class="fa fa-angle-down" aria-hidden="true" style="margin-top: 3px;"></i></div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li><a href="profil">Profilim</a></li>
+                                                    <li><a href="sifre-islemleri">Şifre İşlemleri</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li><a class="apply-now-btn" href="logout" id="logout-button">Çıkış Yap</a></li>
+
+                                    <?php } else { ?>
+
+                                        <p>boş</p>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>

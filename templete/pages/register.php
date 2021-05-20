@@ -107,13 +107,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="e_posta">E-Mail Adresi *</label>
                             <input type="email" id="e_posta" name="e_posta" class="form-control">
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label" for="firma_sifre">Şifre *</label>
+                            <input type="password" id="firma_sifre" name="firma_sifre" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="form-group">
                             <label class="control-label" for="web_sitesi">Web Sitesi *</label>
                             <input type="text" id="web_sitesi" name="web_sitesi" class="form-control">

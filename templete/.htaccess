@@ -7,4 +7,6 @@ RewriteCond $1 !^(css|js|images|inc|lang)
 RewriteRule ^(.*)$ $1.php
 
 RewriteRule ^register$ index.php?page=register [L,NC]
-RewriteRule ^detay/oyuncu/([0-9a-zA-Z-_]+)$ index.php?page=detay&sef=$1 [NC]
+RewriteRule ^sifre-islemleri$ index.php?page=sifre-islemleri [L,QSA]
+RewriteRule ^profil$ index.php?page=profil&sayfa=1 [L,QSA]
+RewriteRule ^logout$ index.php?page=logout [L,QSA]
