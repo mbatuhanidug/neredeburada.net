@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -67,9 +67,6 @@
                                         <li><a class="apply-now-btn-color hidden-on-mobile" href="register">Kayıt Ol</a></li>
                                     <?php } else if (isset($_SESSION['kullanici']) && $_SESSION['kullanici']['id'] > 0) { ?>
                                         <li>
-                                            <div class="cart-area" id="sepetim-icerik"></div>
-                                        </li>
-                                        <li>
                                             <div class="user-account-info">
                                                 <div class="user-account-info-controler" style="cursor:pointer">
                                                     <div class="user-account-title">
@@ -95,7 +92,6 @@
                                                 <ul>
                                                     <li><a href="firma-profil">Firma Bilgileri</a></li>
                                                     <li><a href="firma-sifre-islemleri">Şifre İşlemleri</a></li>
-                                                    <li><a href="reklamlar">Reklamlar</a></li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -111,31 +107,6 @@
                         <nav id="desktop-nav">
                             <ul>
                                 <li class="active"><a href="index.php">Anasayfa</a></li>
-                                <li><a href="about.php">Hakkımızda</a></li>
-                                <li><a href="hizmetler.php">Hizmetler</a>
-                                    <ul class="mega-menu-area">
-                                        <li>
-                                            <a href="product-page-list.htm">Product List</a>
-                                            <a href="product-category-grid.htm">Category Grid</a>
-                                            <a href="product-category-list.htm">Category List</a>
-                                            <a href="single-product.htm">Product Details</a>
-                                        </li>
-                                        <li>
-                                            <a href="profile.htm">Profile</a>
-                                            <a href="favourites-grid.htm">Favourites Grid</a>
-                                            <a href="favourites-list.htm">Favourites List</a>
-                                            <a href="settings.htm">Settings</a>
-                                        </li>
-                                        <li>
-                                            <a href="upload-products.htm">Upload Products</a>
-                                            <a href="sales-statement.htm">Sales Statement</a>
-                                            <a href="withdrawals.htm">Withdrawals</a>
-                                            <a href="404.htm">404</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.php">İletişim</a></li>
-
                             </ul>
                         </nav>
                     </div>

@@ -128,11 +128,15 @@ if ($action == 'firma-giris') :
     $yetkili_tel = filter($_POST['firma_telefon']);
 
     $sorgu = $db->prepare('SELECT * FROM firmalar WHERE e_posta = :e_posta AND yetkili_tel = :yetkili_tel AND firma_sifre = :firma_sifre LIMIT 1');
-    $sorgu->execute(['e_posta' => $e_posta, 'firma_sifre' => $firma_sifre , 'yetkili_tel' => $yetkili_tel]);
+    $sorgu->execute(['e_posta' => $e_posta, 'firma_sifre' => $firma_sifre, 'yetkili_tel' => $yetkili_tel]);
     $kisi = $sorgu->fetch(PDO::FETCH_ASSOC);
     if ($kisi) {
-        $_SESSION['firma'] = $kisi;
-        $FNC->sendResult(true);
+        if ($kisi['durum'] == 1) :
+            $_SESSION['firma'] = $kisi;
+            $FNC->sendResult(true);
+        else :
+            $FNC->sendResult(false, 'Durum aktif değil');
+        endif;
     } else {
         $FNC->sendResult(false, 'Böyle bir firma bulunmamaktadır');
     }
@@ -194,12 +198,86 @@ if ($action == 'sifre-guncelle') :
 
 endif;
 
+if ($action == 'firma-sifre-guncelle') :
+    $sorgu = $db->prepare('SELECT * FROM firmalar WHERE e_posta = :e_posta AND firma_sifre =:firma_sifre LIMIT 1');
+    $sorgu->execute(['e_posta' => $firmacek['e_posta'], 'firma_sifre' => filter($_POST['firma_sifre_eski'])]);
+    $kisi = $sorgu->fetch(PDO::FETCH_ASSOC);
+    if ($kisi) {
+        $firmakaydet = $db->prepare("UPDATE firmalar SET
+            firma_sifre   = :firma_sifre
+            WHERE id = :id
+    ");
+        $update = $firmakaydet->execute(array(
+            'firma_sifre' => filter($_POST['sifre']),
+            'id'    => filter($firmacek['id'])
+        ));
+        if ($update) {
+            $FNC->sendResult(true);
+        } else {
+            $FNC->sendResult(False, 'Şifre güncellenirken bir hata oluştu');
+        }
+    } else {
+        $FNC->sendResult(false, 'Böyle bir firma bulunmamaktadır');
+    }
+
+endif;
+
+
 
 if ($action == 'sepettekiler') {
-    $sorgu = $db->prepare('SELECT * FROM favoriler WHERE kullanici_id = :kullanici_id');
-    $sorgu->execute(['kullanici_id' => $_SESSION['kullanici']['id']]);
-    if ($sorgu->rowCount() == 0) {
-        echo '<a><i class="fa fa-heart" aria-hidden="true"></i><span>0</span></a>
+    if (isset($_SESSION['kullanici'])) {
+        $sorgu = $db->prepare('SELECT * FROM favoriler WHERE kullanici_id = :kullanici_id');
+        $sorgu->execute(['kullanici_id' => $_SESSION['kullanici']['id']]);
+        if ($sorgu->rowCount() == 0) {
+            echo '<a><i class="fa fa-heart" aria-hidden="true"></i><span>0</span></a>
         <ul ><p><b style="color:red;">Favori reklamınız bulunmamaktadır</b></p></ul>';
+        }
+    } else {
+        die();
     }
 }
+
+if ($action == 'reklam-ver') :
+    print_r($_FILES['resimler']);
+    die();
+    $baslik = filter($_POST['baslik']);
+    $icerik = filter($_POST['icerik']);
+    $kategori_id = filter($_POST['kategori_id']);
+
+    $kaydet = $db->prepare("INSERT INTO reklamlar SET
+        baslik  = :baslik,
+        icerik   = :icerik,
+        kategori_id  = :kategori_id,
+        firma_id  = :firma_id,
+        seo  = :seo
+    ");
+    $insert = $kaydet->execute(array(
+        'baslik' => $baslik,
+        'icerik'  => $icerik,
+        'kategori_id' => $kategori_id,
+        'firma_id' => $firmacek['id'],
+        'seo' => seo($baslik)
+    ));
+    if ($insert) {
+        $sonislem = $db->lastInsertId();
+        $uploads_dir     = '../admin_panel/production/images';
+        for ($i = 0; $i < count($_FILES['resimler']['name']); $i++) :
+            @$tmp_name       = $_FILES['resimler']["tmp_name"][$i];
+            @$name           = $_FILES['resimler']["name"][$i];
+            $refimgyol       = substr($uploads_dir, 3) . "/" . $name;
+            $klasor = $uploads_dir . '/' . $name;
+            @move_uploaded_file($tmp_name, $klasor);
+            $kaydet = $db->prepare("INSERT INTO resimler SET
+                    reklam_id  = :reklam_id,
+                    resim   = :resim
+                ");
+            $insert = $kaydet->execute(array(
+                'reklam_id' => $sonislem,
+                'resim'  => $refimgyol
+            ));
+        endfor;
+        $FNC->sendResult(true);
+    } else {
+        $FNC->sendResult(False, 'Üye eklerken bir hata oluştu');
+    }
+endif;

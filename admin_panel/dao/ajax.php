@@ -341,9 +341,9 @@ if ($action == 'firma-durum-guncelle') {
     $aciklama = filter($_POST['aciklama']);
     if (isset($_POST['durum_mail_gonder']) && $_POST['durum_mail_gonder'] == 'on') {
         $from = "dogannsebati@gmail.com";
-        $to = "test@hostinger.com";
-        $subject = "Checking PHP mail";
-        $message = "PHP mail works just fine";
+        $to = filter($_POST['e_posta']);
+        $subject = "Firma Durum";
+        $message = $aciklama;
         $headers = "From:" . $from;
         mail($to, $subject, $message, $headers);
         echo "The email message was sent.";

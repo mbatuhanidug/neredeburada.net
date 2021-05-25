@@ -1,7 +1,7 @@
 <?php
 $mysqlsunucu = "localhost";
 $mysqlkullanici = "root";
-$mysqlsifre = "root";
+$mysqlsifre = "732284Ata";
 
 try {
     $db = new PDO("mysql:host=$mysqlsunucu;dbname=nerede_burada;charset=utf8", $mysqlkullanici, $mysqlsifre);

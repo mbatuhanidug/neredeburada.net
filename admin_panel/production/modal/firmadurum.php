@@ -91,6 +91,7 @@ $firma = $sorgu->fetch(PDO::FETCH_ASSOC);
                     <div class="c">
                         <form id="firma-durum-guncelle">
                             <input type="hidden" name="id" value="<?= $firma['id']; ?>">
+                            <input type="hidden" name="e_posta" value="<?= $firma['e_posta']; ?>">
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputEmail4">Durum</label>

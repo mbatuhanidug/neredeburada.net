@@ -1,24 +1,3 @@
-function sepetYenile() {
-    var islem_turu = "sepettekiler";
-    $.ajax({
-        url: 'ajax.php',
-        type: 'POST',
-        data: {
-            islem_turu: islem_turu,
-        },
-        success: function(data) {
-            $("#sepetim-icerik").html(data);
-        }
-    });
-}
-window.onload = function() {
-
-    sepetYenile();
-
-};
-
-
-
 function onlyLetter(input_id) {
     $("#" + input_id).on("keyup", function() {
         var ohmis = $(this).val().replace(/[^a-zA-Z-32]/g, '');
@@ -266,6 +245,78 @@ function sifreGuncelle(form_name, islem_turu) {
 
             } else {
                 swal("Hata!", response.message, "warning");
+            }
+        },
+    });
+}
+
+
+function firmasifreGuncelle(form_name, islem_turu) {
+    var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: serialized,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+                let timerInterval;
+                Swal.fire({
+                    title: 'Şifre Güncelleme!',
+                    html: 'Şifreniz güncellendi. <b></b> Çıkış yapılıyor....',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getHtmlContainer()
+                            if (content) {
+                                const b = content.querySelector('b')
+                                if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                        }, 100)
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        $(location).attr('href', 'logout');
+                    }
+                })
+
+            } else {
+                swal("Hata!", response.message, "warning");
+            }
+        },
+    });
+}
+
+function reklamVer(form_name, islem_turu) {
+    var formData = new FormData($('#' + form_name)[0]);
+    formData.append('islem_turu', islem_turu);
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: response.message,
+                    showConfirmButton: false,
+                    timer: 2500
+                });
             }
         },
     });
