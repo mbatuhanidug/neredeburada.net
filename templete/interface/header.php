@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Foxtar | Registration</title>
-    <meta name="description" content="">
+    <title><?= $ayar['title']; ?></title>
+    <meta name="description" content="<?= $ayar['desc_ription']; ?>">
+    <meta name="keywords" content="<?= $ayar['keywords']; ?>">
+    <link rel="icon" href="../admin_panel/production/<?= $ayar['favicon']; ?>" type="image/x-icon" sizes="16x16">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="img\favicon.png">
     <link rel="stylesheet" href="css\normalize.css">
     <link rel="stylesheet" href="css\main.css">
     <link rel="stylesheet" href="css\bootstrap.min.css">
@@ -36,7 +37,7 @@
                         <div class="row">
                             <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                                 <div class="logo-area">
-                                    <a href="index.php"><img class="img-responsive" src="img\logo.png" alt="logo"></a>
+                                    <a href="index.php"><img class="img-responsive" src="../admin_panel/production/<?= $ayar['logo']; ?>" alt="logo"></a>
                                 </div>
                             </div>
                             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
@@ -55,16 +56,19 @@
                                                         <button class="btn-login" type="button" onclick="kullaniciGiris('kullanici-giris-form','kullanici-giris');return false;" value="">Giriş Yap</button>
                                                     </form>
                                                     <form id="firma-giris-form" style="display: none;">
-                                                        <input class="form-control" type="text" placeholder="Firma E-posta Adresini Giriniz...">
-                                                        <input class="form-control" type="password" placeholder="Şifrenizi Giriniz...">
-                                                        <input class="form-control" type="password" placeholder="Yetkili Telefon Numarası Giriniz...">
+                                                        <input class="form-control" type="text" name="firma_email" placeholder="Firma E-posta Adresini Giriniz...">
+                                                        <input class="form-control" type="password" name="firma_sifre" placeholder="Şifrenizi Giriniz...">
+                                                        <input class="form-control" type="text" name="firma_telefon" placeholder="Yetkili Telefon Numarası Giriniz...">
                                                         <button class="btn-login" type="button" onclick="firmaGiris('firma-giris-form','firma-giris');return false;" value="">Giriş Yap</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </li>
                                         <li><a class="apply-now-btn-color hidden-on-mobile" href="register">Kayıt Ol</a></li>
-                                    <?php } else if ($_SESSION['kullanici']['id'] > 0) { ?>
+                                    <?php } else if (isset($_SESSION['kullanici']) && $_SESSION['kullanici']['id'] > 0) { ?>
+                                        <li>
+                                            <div class="cart-area" id="sepetim-icerik"></div>
+                                        </li>
                                         <li>
                                             <div class="user-account-info">
                                                 <div class="user-account-info-controler" style="cursor:pointer">
@@ -81,8 +85,21 @@
                                         <li><a class="apply-now-btn" href="logout" id="logout-button">Çıkış Yap</a></li>
 
                                     <?php } else { ?>
-
-                                        <p>boş</p>
+                                        <li>
+                                            <div class="user-account-info">
+                                                <div class="user-account-info-controler" style="cursor:pointer">
+                                                    <div class="user-account-title">
+                                                        <div class="user-account-name"><?= $_SESSION['firma']['firma_adi'] ?> <i class="fa fa-angle-down" aria-hidden="true" style="margin-top: 3px;"></i></div>
+                                                    </div>
+                                                </div>
+                                                <ul>
+                                                    <li><a href="firma-profil">Firma Bilgileri</a></li>
+                                                    <li><a href="firma-sifre-islemleri">Şifre İşlemleri</a></li>
+                                                    <li><a href="reklamlar">Reklamlar</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li><a class="apply-now-btn" href="logout" id="logout-button">Çıkış Yap</a></li>
                                     <?php } ?>
                                 </ul>
                             </div>
@@ -124,49 +141,5 @@
                     </div>
                 </div>
             </div>
-            <!-- Mobile Menu Area Start -->
-            <div class="mobile-menu-area">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="mobile-menu">
-                                <nav id="dropdown">
-                                    <ul>
-                                        <li class="active"><a href="index.htm">Anasayfa</a></li>
-                                        <li><a href="about.htm">Hakkımızda</a></li>
-                                        <li><a href="#">Hizmetler</a>
-                                            <ul class="mega-menu-area">
-                                                <li>
-                                                    <a href="product-page-grid.htm">Product Grid</a>
-                                                </li>
-                                                <li>
-                                                    <a href="product-page-list.htm">Product List</a>
-                                                    <a href="product-category-grid.htm">Category Grid</a>
-                                                    <a href="product-category-list.htm">Category List</a>
-                                                    <a href="single-product.htm">Product Details</a>
-                                                </li>
-                                                <li>
-                                                    <a href="profile.htm">Profile</a>
-                                                    <a href="favourites-grid.htm">Favourites Grid</a>
-                                                    <a href="favourites-list.htm">Favourites List</a>
-                                                    <a href="settings.htm">Settings</a>
-                                                </li>
-                                                <li>
-                                                    <a href="upload-products.htm">Upload Products</a>
-                                                    <a href="sales-statement.htm">Sales Statement</a>
-                                                    <a href="withdrawals.htm">Withdrawals</a>
-                                                    <a href="404.htm">404</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.htm">İletişim</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu Area End -->
         </header>
         <!-- Header Area End Here -->

@@ -122,6 +122,22 @@ if ($action == 'kullanici-giris') :
     }
 endif;
 
+if ($action == 'firma-giris') :
+    $e_posta = filter($_POST['firma_email']);
+    $firma_sifre = filter($_POST['firma_sifre']);
+    $yetkili_tel = filter($_POST['firma_telefon']);
+
+    $sorgu = $db->prepare('SELECT * FROM firmalar WHERE e_posta = :e_posta AND yetkili_tel = :yetkili_tel AND firma_sifre = :firma_sifre LIMIT 1');
+    $sorgu->execute(['e_posta' => $e_posta, 'firma_sifre' => $firma_sifre , 'yetkili_tel' => $yetkili_tel]);
+    $kisi = $sorgu->fetch(PDO::FETCH_ASSOC);
+    if ($kisi) {
+        $_SESSION['firma'] = $kisi;
+        $FNC->sendResult(true);
+    } else {
+        $FNC->sendResult(false, 'Böyle bir firma bulunmamaktadır');
+    }
+endif;
+
 
 if ($action == 'profil-guncelle') :
     $kullanicikaydet = $db->prepare("UPDATE kullanici SET
@@ -159,7 +175,7 @@ if ($action == 'sifre-guncelle') :
     $sorgu->execute(['mail' => $kullanicicek['mail'], 'sifre' => filter($_POST['kullanici_sifre_eski'])]);
     $kisi = $sorgu->fetch(PDO::FETCH_ASSOC);
     if ($kisi) {
-    $kullanicikaydet = $db->prepare("UPDATE kullanici SET
+        $kullanicikaydet = $db->prepare("UPDATE kullanici SET
             sifre   = :sifre
             WHERE id = :id
     ");
@@ -177,3 +193,13 @@ if ($action == 'sifre-guncelle') :
     }
 
 endif;
+
+
+if ($action == 'sepettekiler') {
+    $sorgu = $db->prepare('SELECT * FROM favoriler WHERE kullanici_id = :kullanici_id');
+    $sorgu->execute(['kullanici_id' => $_SESSION['kullanici']['id']]);
+    if ($sorgu->rowCount() == 0) {
+        echo '<a><i class="fa fa-heart" aria-hidden="true"></i><span>0</span></a>
+        <ul ><p><b style="color:red;">Favori reklamınız bulunmamaktadır</b></p></ul>';
+    }
+}

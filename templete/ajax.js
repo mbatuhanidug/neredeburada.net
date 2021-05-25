@@ -1,3 +1,24 @@
+function sepetYenile() {
+    var islem_turu = "sepettekiler";
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        data: {
+            islem_turu: islem_turu,
+        },
+        success: function(data) {
+            $("#sepetim-icerik").html(data);
+        }
+    });
+}
+window.onload = function() {
+
+    sepetYenile();
+
+};
+
+
+
 function onlyLetter(input_id) {
     $("#" + input_id).on("keyup", function() {
         var ohmis = $(this).val().replace(/[^a-zA-Z-32]/g, '');
@@ -153,6 +174,24 @@ function firmaKayit(form_name, islem_turu) {
 
 
 function kullaniciGiris(form_name, islem_turu) {
+    var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
+    $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        data: serialized,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if (response.success) {
+                $(location).attr('href', 'index');
+            } else {
+                $('#login-button').trigger('click');
+                swal("Hata!", response.message, "warning");
+            }
+        },
+    });
+}
+
+function firmaGiris(form_name, islem_turu) {
     var serialized = $("#" + form_name).serialize() + "&islem_turu=" + islem_turu;
     $.ajax({
         type: 'POST',
